@@ -1,0 +1,119 @@
+﻿@model BbWeb.Models.ShoppingCartVM
+
+
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<br />
+
+<h2 class="text-info">Order Details</h2>
+<br />
+
+<form asp-action="Checkout" asp-controller="Cart"  method="Post" enctype="multipart/form-data">
+    <div class="p-4 rounded border row">
+        <div asp-validation-summary="ModelOnly" class="text-danger"> </div>
+          
+
+           <div class="col-6">
+
+              <div class="form-group row">
+                 <div class="col-4">
+                    <label asp-for="OrderHeader.Name" class="control-label"></label>
+                 </div>
+                 <div class="col-8">
+                    <input asp-for="OrderHeader.Name" class="form-control" />
+                  <span asp-validation-for="OrderHeader.Name" class="text-danger"></span>
+                 </div>
+              </div>
+
+               <div class="form-group row">
+                 <div class="col-4">
+                   <label asp-for="OrderHeader.PhoneNumber" class="control-label"></label>
+                 </div>
+                 <div class="col-8">
+                  <input asp-for="OrderHeader.PhoneNumber"class="form-control" />
+                     <span asp-validation-for="OrderHeader.PhoneNumber" class="text-danger"></span>
+                 </div>
+               </div>
+
+                 <div class="form-group row">
+                 <div class="col-4">
+                   <label asp-for="OrderHeader.Citty" class="control-label"></label>
+                 </div>
+                 <div class="col-8">
+                  <input asp-for="OrderHeader.Citty"class="form-control" />
+                     <span asp-validation-for="OrderHeader.Citty" class="text-danger"></span>
+                 </div>
+               </div>
+             
+            <div class="form-group row">
+               <div class="col-4">
+                 <label asp-for="OrderHeader.Adress" class="control-label"></label>
+               </div>
+               <div class="col-8">
+                 <textarea asp-for="OrderHeader.Adress" rows="3" class="form-control"></textarea>
+                  <span asp-validation-for="OrderHeader.Adress" class="text-danger"></span>
+               </div>
+               
+            </div>
+            
+     </div>
+    
+           <div class="col-6">
+              <table class="table table-striped table-bordered ">
+               <thead>
+                  <tr>
+                   <th>Image</th>
+                   <th>Name</th>
+                   <th>Price</th>
+                   <th>Quantity</th>
+                 </tr>
+             </thead>
+             <tbody>
+                    @foreach(var item in Model.ListCart)
+                    {
+                        <tr>
+                            <td>
+                                <img src="~/@item.Product.Image" height="100px" width="150px" />
+                            </td> 
+                            <td>@item.Product.ProductName</td>
+                            <td>@item.Product.Price</td>
+                            <td>@item.Count</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+           <div class="text-right">
+               <h3>Total Price : @Model.OrderHeader.OrderTotal</h3>
+           </div>
+           <div class="form-group text-right">
+               <input type="submit" value="Place Order" class="btn btn-dark text-right" />
+               <a asp-action="Index" class="btn btn-secondary text-right">Back To cart</a>
+           </div>
+
+           </div>
+        
+           <div class="card-footer mt-3">
+               <div class="row">
+                   <div class="col-12 col-md-8 pt-2">
+                       <p style="color:maroon;font-size:14px;">Estimate Arraival Date :
+                           @DateTime.Now.AddDays(7).ToShortDateString() - @DateTime.Now.AddDays(14).ToShortDateString()
+                       </p>
+                   </div>
+                   <div class="col-12 col-md-4">
+
+                   </div>
+               </div>
+           </div>
+     
+
+    </div>
+
+</form>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

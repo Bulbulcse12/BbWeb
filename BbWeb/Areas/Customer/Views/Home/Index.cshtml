@@ -1,0 +1,45 @@
+﻿@model IEnumerable<BbWeb.Models.Product>
+ 
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<br/><br/>
+
+<div class="col-4 p-0 justify-content-end pt-3 mb-5">
+    <form asp-controller="Home" asp-action="Index">
+        <span class="btn-group">
+            <input class="form-control mr-sm-2" type="text" name="SearchText"
+              placeholder="Search Product Name" />
+              <input class="p-1 ml-2 btn btn-sm btn-dark" type="submit" value="Search" />
+        </span>
+    </form>
+</div>
+
+<div class="row">
+    @foreach(var product in Model)
+    {
+        <div class="col-3">
+            <div class="card-group mb-4">
+               <div class="card-header">
+                     <h4 class="my-0 font-weight-normal">
+                       <label style="font-size:23px;color:black">@product.ProductName</label>
+                     </h4>
+               </div>
+                  <img src="~/@product.Image" alt="Card Image" class="card-img-top"/>
+                  <div class="card-header">
+                      <div class="d-flex justify-content-between align-items-center">
+                          <div class="btn-group">
+                              <label style="font-size:20px;color: #a51313;"><b>Price : @product.Price</b></label>
+                          </div>
+                            <a asp-action="Details" asp-controller="Home" asp-route-productId="@product.Id" 
+                            class="btn btn-dark pull-right btn-outline-info">Details</a>
+                      </div>
+                  </div>
+            </div>
+            
+        </div>
+
+    }
+</div>

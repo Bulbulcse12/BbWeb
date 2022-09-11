@@ -1,0 +1,60 @@
+﻿@model BbWeb.Models.ShoppingCartVM
+
+
+@{
+    ViewData["Title"] = "Cart";
+}
+
+<h1>Your Cart</h1>
+
+<br/>
+<div class="row">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Colour</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in Model.ListCart)
+            {
+                <tr>
+                    <td>
+                        <img src="~/@item.Product.Image" width="200px" height="150px" />
+                    </td>
+                    <td>@item.Product.ProductName</td>
+                      <td>@item.Product.Price</td>
+                        <td>@item.Count</td>
+                          <td>@item.Product.Colour</td>
+                          <td>
+                              <a asp-area="Customer" asp-action="Plus" asp-controller="Cart" asp-route-cartId="@item.Id" class="btn btn-dark">
+                                  Plus
+                               </a>
+                              <a asp-area="Customer" asp-action="Minus" asp-controller="Cart" asp-route-cartId="@item.Id" class="btn btn-warning">
+                                  Minus
+                              </a>
+                              <a asp-area="Customer" asp-action="Remove" asp-controller="Cart" asp-route-cartId="@item.Id" class="btn btn-danger ">
+                                  Remove
+                              </a>
+                          </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div class="row">
+    <div class="col-6">
+        <a asp-area="Customer" asp-action="Index" asp-controller="Home" class="btn btn-dark">Continue Shopping</a>
+    </div>
+    <div class="col-6 text-right">
+         <h3>Total Amount :@Model.OrderHeader.OrderTotal tk</h3>
+         
+          <a asp-area="Customer" asp-action="Checkout" asp-controller="Cart" class="btn btn-secondary">Checkout</a>
+    </div>
+</div>
+

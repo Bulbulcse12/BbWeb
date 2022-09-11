@@ -1,0 +1,115 @@
+﻿@model ShoppingCart
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+<h1 class="p-3 mt-2">Product Details</h1>
+
+
+<div class="row rounded border">
+    <div class="col-8">
+        <form asp-action="Details" method="post" enctype="multipart/form-data">
+            <input hidden asp-for="ProductId" />
+          @*  <div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+            <div class="form-group row">
+                <div class="col-4">
+                     <label asp-for="@Model.Product.ProductName" class="control-label"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="@Model.Product.ProductName" readonly="readonly" class="form-control mb-3" />
+                    <span asp-validation-for="@Model.Product.ProductName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                     <label asp-for="@Model.Product.Description" class="control-label"></label>
+                </div>
+                <div class="col-8">
+                    <textarea asp-for="@Model.Product.Description"  readonly="readonly" rows="3" class="form-control mb-3"></textarea>
+                    <span asp-validation-for="@Model.Product.Description" class="text-danger"></span>
+                </div>   
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                     <label asp-for="@Model.Product.Price" class="control-label"></label>
+                </div>
+                <div class="col-8">
+                       <input asp-for="@Model.Product.Price"  readonly="readonly" class="form-control mb-3" />
+                <span asp-validation-for="@Model.Product.Price" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                     <label asp-for="@Model.Product.Colour" class="control-label"></label>
+                </div>
+                <div class="col-8">
+                       <input asp-for="@Model.Product.Colour"  readonly="readonly" class="form-control mb-3" />
+                       <span asp-validation-for="@Model.Product.Colour" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                      <label class="form-check-label">
+                      <input class="form-check-input mb-3"  readonly="readonly" asp-for="@Model.Product.IsAvailable" /> @Html.DisplayNameFor(model => model.Product.IsAvailable)
+                </label>
+                </div>
+                <div class="col-8">
+
+                </div>     
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                     <label asp-for="@Model.Product.Quantity" class="control-label"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="@Model.Product.Quantity"  readonly="readonly" class="form-control mb-3" />
+                    <span asp-validation-for="@Model.Product.Quantity" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                     <label asp-for="@Model.Product.CategoryId" class="control-label"></label>
+                </div>
+                <div class="col-8">
+                        <input asp-for="@Model.Product.Category.CategoryName"  readonly="readonly" class="form-control mb-3" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="@Model.Product.TagId" class="control-label"></label>
+                </div>
+                <div class="col-8">
+                      <input asp-for="@Model.Product.Tag.TagName"  readonly="readonly" class="form-control mb-3" />
+                </div>  
+            </div>
+                  <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="@Model.Count" class="control-label"></label>
+                </div>
+                <div class="col-8">
+                      <input asp-for="@Model.Count" class="form-control mb-3" />
+                </div>  
+            </div>
+            <div class="form-group mt-2">
+                <a asp-action="Index" class="btn btn-secondary">Back Home</a>
+                <button type="submit" class="btn btn-dark">Add-To-Cart</button>
+               
+            </div>
+        </form>
+    </div>
+      <div class="col-1"></div>
+           <div class="col-3">
+               <img src="~/@Model.Product.Image" width="100%" style="border-radius: 5px;border:1px solid #efefef" />
+           </div>
+</div>
+
+

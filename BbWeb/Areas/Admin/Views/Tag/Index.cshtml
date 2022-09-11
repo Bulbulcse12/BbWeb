@@ -1,0 +1,40 @@
+﻿@model IEnumerable<BbWeb.Models.Tag>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="mt-3">Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table table-striped border">
+    <thead>
+        <tr>
+            <th>Tag Id</th>
+            <th>
+                @Html.DisplayNameFor(model => model.TagName)
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @item.Id
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TagName)
+            </td>
+            <td>
+                <a asp-action="Edit" class="btn btn-dark" asp-route-id="@item.Id">Edit</a> |
+               
+                 @Html.ActionLink("Delete","Delete",new { id=item.Id },
+                new{onclick="return confirm('Are you sure to delete this...?')"})
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
